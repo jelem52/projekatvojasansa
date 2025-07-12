@@ -64,11 +64,11 @@ function App() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-green-400 font-semibold text-lg">Ograničena ponuda!</div>
-                    <div className="text-white text-sm">Cena kursa je snižena sa $60 na samo $25</div>
+                    <div className="text-white text-sm">Cena kursa je snižena sa $60 na samo $24.99</div>
                   </div>
                   <div className="text-right">
                     <div className="text-gray-400 text-lg line-through">$60</div>
-                    <div className="text-3xl font-bold text-green-400">$25</div>
+                    <div className="text-3xl font-bold text-green-400">$24.99</div>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@ function App() {
                 <div className="aspect-video bg-black/50 rounded-xl flex items-center justify-center group cursor-pointer hover:bg-black/40 transition-all duration-300 relative overflow-hidden">
                   {/* Thumbnail as background */}
                   <img 
-                    src="https://img.youtube.com/vi/lIioSZmAXVo/maxresdefault.jpg" 
+                    src="https://img.youtube.com/vi/tmFGh3YiQsU/maxresdefault.jpg" 
                     alt="Tvoja šansa video thumbnail"
                     className="absolute inset-0 w-full h-full object-cover rounded-xl"
                   />
@@ -113,7 +113,7 @@ function App() {
                   <div className="absolute inset-0 bg-black/30 rounded-xl"></div>
                   {/* Play button overlay */}
                   <a 
-                    href="https://www.youtube.com/watch?v=lIioSZmAXVo"
+                    href="https://youtu.be/tmFGh3YiQsU"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="relative bg-gradient-to-r from-pink-500 to-red-500 rounded-full p-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl z-10"
@@ -195,7 +195,7 @@ function App() {
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
-              Pristup celom kursu - Kupi sad za $25
+              Pristup celom kursu - Kupi sad za $24.99
             </a>
           </div>
         </div>
@@ -209,7 +209,7 @@ function App() {
             <p className="text-xl text-gray-300">Realni rezultati, realne transformacije</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               {
                 image: "/IMG_0827 (2).jpeg",
@@ -229,7 +229,7 @@ function App() {
               }
             ].map((result, index) => (
               <div key={index} className="bg-gradient-to-br from-purple-800/40 to-pink-800/40 backdrop-blur-sm border border-white/10 rounded-lg p-2 hover:border-pink-400/50 transition-all duration-300">
-                <div className="w-full h-64 rounded-md overflow-hidden">
+                <div className="w-full h-80 rounded-md overflow-hidden">
                   <img 
                     src={result.image} 
                     alt={result.alt}
@@ -260,7 +260,7 @@ function App() {
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-12 py-5 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block"
             >
-              Kupi sad za $25 - Počni transformaciju
+              Kupi sad za $24.99 - Počni transformaciju
             </a>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
               <Infinity className="w-4 h-4 text-pink-400" />
