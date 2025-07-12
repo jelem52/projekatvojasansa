@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { 
   Heart, 
   Users, 
@@ -344,6 +345,7 @@ function App() {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
