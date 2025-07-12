@@ -118,11 +118,6 @@ function App() {
                       {/* Subtle dark overlay */}
                       <div className="absolute inset-0 bg-black/20 rounded-xl group-hover:bg-black/30 transition-all duration-300"></div>
                       
-                      {/* Sleek play button in bottom right */}
-                      <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm rounded-full p-3 group-hover:bg-black/80 transition-all duration-300 border border-white/20">
-                        <Play className="w-6 h-6 text-white ml-0.5" />
-                      </div>
-                      
                       {/* Hover overlay with centered play icon */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
