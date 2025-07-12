@@ -222,10 +222,10 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1%2A1vsrptq%2A_ga%2ANTkzNTI2MDU2LjE3NTE2MTg3MTQ.%2A_ga_6LJN6D94N6%2AczE3NTE2MTg3MTQkbzEkZzEkdDE3NTE2MTg4NDEkajI0JGwwJGgw&fbclid=PAQ0xDSwLUn1VleHRuA2FlbQIxMAABp27_iEc30CAIlMTI8h9K_-mLBNyVO3u9w2hmFIfUKpmjUXve9--uMy6T-bQO_aem_-bh3tgyzRqqVdqhA3mvR_Q"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block"
             >
-              <span className="block text-center">Pristup celom kursu</span>
-              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">Kupi sad za $24.99</span>
+              <span className="block text-center font-bold">Pristup celom kursu</span>
+              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2 font-bold">Kupi sad za $24.99</span>
             </a>
           </div>
         </div>
