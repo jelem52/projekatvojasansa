@@ -222,9 +222,10 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1%2A1vsrptq%2A_ga%2ANTkzNTI2MDU2LjE3NTE2MTg3MTQ.%2A_ga_6LJN6D94N6%2AczE3NTE2MTg3MTQkbzEkZzEkdDE3NTE2MTg4NDEkajI0JGwwJGgw&fbclid=PAQ0xDSwLUn1VleHRuA2FlbQIxMAABp27_iEc30CAIlMTI8h9K_-mLBNyVO3u9w2hmFIfUKpmjUXve9--uMy6T-bQO_aem_-bh3tgyzRqqVdqhA3mvR_Q"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-10 py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight"
             >
-              Pristup celom kursu - Kupi sad za $24.99
+              <span className="block sm:inline">Pristup celom kursu</span>
+              <span className="block sm:inline sm:ml-2">Kupi sad za $24.99</span>
             </a>
           </div>
         </div>
@@ -238,7 +239,7 @@ function App() {
             <p className="text-xl text-gray-300">Realni rezultati, realne transformacije</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {[
               {
                 image: "/IMG_0827 (2).jpeg",
@@ -258,7 +259,7 @@ function App() {
               }
             ].map((result, index) => (
               <div key={index} className="bg-gradient-to-br from-purple-800/40 to-pink-800/40 backdrop-blur-sm border border-white/10 rounded-lg p-2 hover:border-pink-400/50 transition-all duration-300">
-                <div className="w-full h-80 rounded-md overflow-hidden">
+                <div className="w-full h-96 sm:h-80 lg:h-96 rounded-md overflow-hidden">
                   <img 
                     src={result.image} 
                     alt={result.alt}
@@ -287,9 +288,10 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1%2A1vsrptq%2A_ga%2ANTkzNTI2MDU2LjE3NTE2MTg3MTQ.%2A_ga_6LJN6D94N6%2AczE3NTE2MTg3MTQkbzEkZzEkdDE3NTE2MTg4NDEkajI0JGwwJGgw&fbclid=PAQ0xDSwLUn1VleHRuA2FlbQIxMAABp27_iEc30CAIlMTI8h9K_-mLBNyVO3u9w2hmFIfUKpmjUXve9--uMy6T-bQO_aem_-bh3tgyzRqqVdqhA3mvR_Q"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-12 py-5 rounded-full font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight"
             >
-              Kupi sad za $24.99 - Počni transformaciju
+              <span className="block sm:inline">Kupi sad za $24.99</span>
+              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
             </a>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
               <Infinity className="w-4 h-4 text-pink-400" />
