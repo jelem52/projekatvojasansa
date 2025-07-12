@@ -112,7 +112,7 @@ function App() {
                     <>
                       {/* Thumbnail as background */}
                       <img 
-                        src="https://img.youtube.com/vi/tmFGh3YiQsU/maxresdefault.jpg" 
+                        src="https://img.youtube.com/vi/NBTN1YJ4jhU/maxresdefault.jpg" 
                         alt="Tvoja šansa video thumbnail"
                         className="w-full h-full object-cover rounded-xl"
                       />
@@ -130,7 +130,7 @@ function App() {
                     <>
                       {/* YouTube Embed */}
                       <iframe
-                        src="https://www.youtube.com/embed/tmFGh3YiQsU?autoplay=1&rel=0"
+                        src="https://www.youtube.com/embed/NBTN1YJ4jhU?autoplay=1&rel=0"
                         title="Tvoja šansa - Dating Course Video"
                         className="w-full h-full rounded-xl"
                         frameBorder="0"
