@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { 
   Heart, 
   Users, 
@@ -13,10 +14,13 @@ import {
   Trophy,
   BookOpen,
   Video,
-  Infinity
+  Infinity,
+  X
 } from 'lucide-react';
 
 function App() {
+  const [showVideo, setShowVideo] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
@@ -102,27 +106,57 @@ function App() {
 
             <div className="relative">
               <div className="relative bg-gradient-to-br from-purple-800/50 to-pink-800/50 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
-                <div className="aspect-video bg-black/50 rounded-xl flex items-center justify-center group cursor-pointer hover:bg-black/40 transition-all duration-300 relative overflow-hidden">
-                  {/* Thumbnail as background */}
-                  <img 
-                    src="https://img.youtube.com/vi/tmFGh3YiQsU/maxresdefault.jpg" 
-                    alt="Tvoja šansa video thumbnail"
-                    className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                  />
-                  {/* Dark overlay for better play button visibility */}
-                  <div className="absolute inset-0 bg-black/30 rounded-xl"></div>
-                  {/* Play button overlay */}
-                  <a 
-                    href="https://youtu.be/tmFGh3YiQsU"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative bg-gradient-to-r from-pink-500 to-red-500 rounded-full p-6 group-hover:scale-110 transition-transform duration-300 shadow-2xl z-10"
-                  >
-                    <Play className="w-12 h-12 text-white ml-1" />
-                  </a>
+                <div className="aspect-video bg-black/50 rounded-xl relative overflow-hidden group cursor-pointer" onClick={() => setShowVideo(true)}>
+                  {!showVideo ? (
+                    <>
+                      {/* Thumbnail as background */}
+                      <img 
+                        src="https://img.youtube.com/vi/tmFGh3YiQsU/maxresdefault.jpg" 
+                        alt="Tvoja šansa video thumbnail"
+                        className="w-full h-full object-cover rounded-xl"
+                      />
+                      {/* Subtle dark overlay */}
+                      <div className="absolute inset-0 bg-black/20 rounded-xl group-hover:bg-black/30 transition-all duration-300"></div>
+                      
+                      {/* Sleek play button in bottom right */}
+                      <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm rounded-full p-3 group-hover:bg-black/80 transition-all duration-300 border border-white/20">
+                        <Play className="w-6 h-6 text-white ml-0.5" />
+                      </div>
+                      
+                      {/* Hover overlay with centered play icon */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
+                          <Play className="w-8 h-8 text-white ml-1" />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* YouTube Embed */}
+                      <iframe
+                        src="https://www.youtube.com/embed/tmFGh3YiQsU?autoplay=1&rel=0"
+                        title="Tvoja šansa - Dating Course Video"
+                        className="w-full h-full rounded-xl"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                      
+                      {/* Close button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowVideo(false);
+                        }}
+                        className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full p-2 hover:bg-black/80 transition-all duration-300 border border-white/20 z-10"
+                      >
+                        <X className="w-5 h-5 text-white" />
+                      </button>
+                    </>
+                  )}
                 </div>
                 <p className="text-center text-gray-300 mt-4 font-medium">
-                  Pogledaj uvodni video i saznaj kako možeš promeniti svoj život
+                  {!showVideo ? 'Pogledaj uvodni video i saznaj kako možeš promeniti svoj život' : 'Kliknite X da zatvorite video'}
                 </p>
               </div>
               
