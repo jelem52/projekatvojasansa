@@ -169,9 +169,9 @@ function App() {
       <section className="py-20 bg-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-white mb-4">Šta dobijaš u kursu</h3>
+            <h3 className="text-4xl font-bold text-white mb-4">Zašto si uopšte ovde?</h3>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Kompletna transformacija kroz strategije i tehnike koje stvarno funkcionišu
+              Jer ti srce lupa svaki put kad ti se devojka obrati. Jer zavidiš likovima koji svaki vikend smuvaju drugu ribu. Dosta brate! Treba ti ovo:
             </p>
           </div>
 
@@ -179,33 +179,33 @@ function App() {
             {[
               {
                 icon: <MessageCircle className="w-8 h-8" />,
-                title: "Veština komunikacije",
-                description: "Naučite kako da vodite zanimljive razgovore i privučete pažnju"
-              },
-              {
-                icon: <Target className="w-8 h-8" />,
-                title: "Strategije pristupa",
-                description: "Efikasne tehnike za prvi kontakt i stvaranje privlačnosti"
-              },
-              {
-                icon: <Zap className="w-8 h-8" />,
-                title: "Izgradnja samopouzdanja",
-                description: "Mentalne tehnike za jačanje unutrašnje snage i karizme"
-              },
-              {
-                icon: <Heart className="w-8 h-8" />,
-                title: "Psihologija privlačnosti",
-                description: "Razumevanje ženskog uma i šta stvarno privlači devojke"
-              },
-              {
-                icon: <Trophy className="w-8 h-8" />,
-                title: "Kako da svaka bude tvoja",
-                description: "Konkretni zadaci i strategije za osvajanje bilo koje devojke"
+                title: "Veština Komunikacije",
+                description: "Naučićeš kako da pričaš sa devojkama bez da mucaš i zaboravljaš šta si hteo da kažeš."
               },
               {
                 icon: <Video className="w-8 h-8" />,
-                title: "Video materijali",
-                description: "Kvalitetni video lekcije sa detaljnim objašnjenjima i primerima"
+                title: "Video Lekcije",
+                description: "Jasne lekcije, u kojima ćeš videti detaljna objašnjenja i realne primere."
+              },
+              {
+                icon: <Zap className="w-8 h-8" />,
+                title: "Izgradnja Samopouzdanja",
+                description: "Pokazaćemo ti tehnike uz pomoć kojih se više nećeš znojiti kad treba da platiš konobaricu za račun."
+              },
+              {
+                icon: <Heart className="w-8 h-8" />,
+                title: "Psihologija Privlačnosti",
+                description: "Postaćeš genije za razumevanje ženskog uma, i saznaćeš šta ih zapravo privlači."
+              },
+              {
+                icon: <Video className="w-8 h-8" />,
+                title: "Video Lekcije",
+                description: "Jasne lekcije, u kojima ćeš videti detaljna objašnjenja i realne primere."
+              },
+              {
+                icon: <Target className="w-8 h-8" />,
+                title: "Konkretni Rezultati",
+                description: "Videćeš konkretne rezultate čim kreneš da primenjuješ znanje."
               }
             ].map((item, index) => (
               <div key={index} className="bg-gradient-to-br from-purple-800/30 to-pink-800/30 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-pink-400/50 transition-all duration-300 group">
