@@ -56,12 +56,12 @@ function App() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Tvoja šansa da
-                  <span className="bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent"> pronađeš devojku</span>
+                  Tvoja Šansa da
+                  <span className="bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent"> konačno smuvaš ribu</span>
                 </h2>
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  Naučite tajne uspešnog zavođenja i izgradite samopouzdanje koje privlači devojke. 
-                  Kurs koji je već promenio živote stotina muškaraca širom regiona.
+                  Jel se plašiš da priđeš devojci? Jel se plašiš da će te odbiti?
+                  Jel se plašiš da ćeš zauvek ostati sam?
                 </p>
               </div>
               
@@ -85,7 +85,7 @@ function App() {
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
                 >
-                  <span>Počni transformaciju</span>
+                  <span>Nauči kako</span>
                   <ArrowRight className="w-5 h-5" />
                 </a>
                 <button className="border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10">
