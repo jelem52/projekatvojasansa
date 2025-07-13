@@ -56,11 +56,12 @@ function App() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
-                  Tvoja Šansa da
+                  Tvoja šansa da
                   <span className="bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent"> konačno smuvaš ribu</span>
                 </h2>
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  Jel se plašiš da priđeš devojci? Jel se plašiš da će te odbiti?
+                  Jel se plašiš da priđeš devojci?<br />
+                  Jel se plašiš da će te odbiti?<br />
                   Jel se plašiš da ćeš zauvek ostati sam?
                 </p>
               </div>
