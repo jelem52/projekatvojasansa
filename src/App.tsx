@@ -179,32 +179,32 @@ function App() {
             {[
               {
                 icon: <MessageCircle className="w-8 h-8" />,
-                title: "Veština Komunikacije",
+                title: "Komunikacija",
                 description: "Naučićeš kako da pričaš sa devojkama bez da mucaš i zaboravljaš šta si hteo da kažeš."
               },
               {
                 icon: <Video className="w-8 h-8" />,
-                title: "Video Lekcije",
+                title: "Lekcije",
                 description: "Jasne lekcije, u kojima ćeš videti detaljna objašnjenja i realne primere."
               },
               {
                 icon: <Zap className="w-8 h-8" />,
-                title: "Izgradnja Samopouzdanja",
+                title: "Samopouzdanje",
                 description: "Pokazaćemo ti tehnike uz pomoć kojih se više nećeš znojiti kad treba da platiš konobaricu za račun."
               },
               {
                 icon: <Heart className="w-8 h-8" />,
-                title: "Psihologija Privlačnosti",
+                title: "Privlačnosti",
                 description: "Postaćeš genije za razumevanje ženskog uma, i saznaćeš šta ih zapravo privlači."
               },
               {
                 icon: <Video className="w-8 h-8" />,
-                title: "Video Lekcije",
+                title: "Lekcije",
                 description: "Jasne lekcije, u kojima ćeš videti detaljna objašnjenja i realne primere."
               },
               {
                 icon: <Target className="w-8 h-8" />,
-                title: "Konkretni Rezultati",
+                title: "Rezultati",
                 description: "Videćeš konkretne rezultate čim kreneš da primenjuješ znanje."
               }
             ].map((item, index) => (
