@@ -277,11 +277,11 @@ function App() {
       <section className="py-20 bg-gradient-to-r from-pink-600/20 to-red-600/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-4xl font-bold text-white mb-6">
-            Spremni ste za promenu?
+            Spreman da nađeš devojku?
           </h3>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Ne čekajte više. Svaki dan koji prođe je propuštena prilika za bolji ljubavni život.
-            Pridružite se stotinama muškaraca koji su već transformisali svoje živote.
+            Svaki dan koji prođe je propuštena prilika za poljubac, vezu ili druženje na veče...
+            Prestani da odlažeš ovo, znaš da ti treba. Klikni na dugme ispod pa se vidimo u kursu.
           </p>
           
           <div className="space-y-4">
