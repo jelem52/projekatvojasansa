@@ -38,7 +38,7 @@ function App() {
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
             <a 
-              href="https://gumroad.com/checkout?_gl=1*1wsu26o*_ga*ODYxNzMwNzkzLjE3NTI0OTQzNTk.*_ga_6LJN6D94N6*czE3NTI1MDQ1ODUkbzMkZzEkdDE3NTI1MDUwMTAkajYwJGwwJGgw"
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -81,7 +81,7 @@ function App() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
-                  href="https://gumroad.com/checkout?_gl=1*1wsu26o*_ga*ODYxNzMwNzkzLjE3NTI0OTQzNTk.*_ga_6LJN6D94N6*czE3NTI1MDQ1ODUkbzMkZzEkdDE3NTI1MDUwMTAkajYwJGwwJGgw"
+                  href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
@@ -221,7 +221,7 @@ function App() {
 
           <div className="text-center mt-12">
             <a 
-              href="https://gumroad.com/checkout?_gl=1*1wsu26o*_ga*ODYxNzMwNzkzLjE3NTI0OTQzNTk.*_ga_6LJN6D94N6*czE3NTI1MDQ1ODUkbzMkZzEkdDE3NTI1MDUwMTAkajYwJGwwJGgw"
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block"
@@ -287,7 +287,7 @@ function App() {
           
           <div className="space-y-4">
             <a 
-              href="https://gumroad.com/checkout?_gl=1*1wsu26o*_ga*ODYxNzMwNzkzLjE3NTI0OTQzNTk.*_ga_6LJN6D94N6*czE3NTI1MDQ1ODUkbzMkZzEkdDE3NTI1MDUwMTAkajYwJGwwJGgw"
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight"
