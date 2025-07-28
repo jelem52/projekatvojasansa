@@ -114,6 +114,11 @@ function App() {
                     <div className="text-3xl font-bold text-green-400">
                       ${isDiscountActive ? '15' : '25'}
                     </div>
+                    {isDiscountActive && (
+                      <div className="text-xs text-red-400 font-bold mt-1">
+                        UŠTEDA $10!
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
