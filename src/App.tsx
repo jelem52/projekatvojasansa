@@ -49,20 +49,20 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Campaign Banner */}
-      <div className="bg-gradient-to-r from-red-600 to-pink-600 text-white py-3 px-4 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative flex items-center justify-center space-x-4 text-sm sm:text-base font-semibold">
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></div>
-            <span>🔥 KAMPANJA U TOKU!</span>
-          </div>
-          <span className="hidden sm:inline">•</span>
-          <span className="text-yellow-200">Cena snižena sa $25 na $15</span>
-          <span className="hidden sm:inline">•</span>
-          <div className="flex items-center space-x-1 text-yellow-200">
-            <span>Ostalo:</span>
-            <span className="font-bold">{timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m</span>
+      {/* Floating Campaign Badge */}
+      <div className="fixed top-4 right-4 z-50">
+        <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-4 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm animate-pulse">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 text-sm font-bold">
+              <span>🔥</span>
+              <span>KAMPANJA U TOKU!</span>
+            </div>
+            <div className="text-xs mt-1 text-yellow-200">
+              $25 → $15
+            </div>
+            <div className="text-xs text-yellow-200 font-semibold">
+              {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m
+            </div>
           </div>
         </div>
       </div>
