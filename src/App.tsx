@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { 
   Heart, 
@@ -21,6 +21,34 @@ import {
 
 function App() {
   const [showVideo, setShowVideo] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isDiscountActive, setIsDiscountActive] = useState(true);
+
+  useEffect(() => {
+    // Set the countdown end date (4 days from now)
+    const countdownEnd = new Date();
+    countdownEnd.setDate(countdownEnd.getDate() + 4);
+    
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countdownEnd.getTime() - now;
+      
+      if (distance < 0) {
+        setIsDiscountActive(false);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        clearInterval(timer);
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -69,12 +97,26 @@ function App() {
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-green-400 font-semibold text-lg">Ograničena ponuda!</div>
-                    <div className="text-white text-sm">Cena kursa je snižena sa $60 na samo $24.99</div>
+                    <div className="text-green-400 font-semibold text-lg">
+                      {isDiscountActive ? 'Ograničena ponuda!' : 'Regularna cena'}
+                    </div>
+                    <div className="text-white text-sm">
+                      {isDiscountActive 
+                        ? 'Cena kursa je snižena sa $25 na samo $15' 
+                        : 'Cena kursa je $25'
+                      }
+                    </div>
+                    {isDiscountActive && (
+                      <div className="text-red-400 text-xs mt-1 font-medium">
+                        Ponuda ističe za: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+                      </div>
+                    )}
                   </div>
                   <div className="text-right">
-                    <div className="text-gray-400 text-lg line-through">$60</div>
-                    <div className="text-3xl font-bold text-green-400">$24.99</div>
+                    <div className="text-gray-400 text-lg line-through">$25</div>
+                    <div className="text-3xl font-bold text-green-400">
+                      ${isDiscountActive ? '15' : '25'}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -224,10 +266,17 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
             >
               <span className="block text-center">Pristup celom kursu</span>
-              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">Kupi sad za $24.99</span>
+              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
+              </span>
+              {isDiscountActive && (
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  POPUST!
+                </div>
+              )}
             </a>
           </div>
         </div>
@@ -290,10 +339,17 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
             >
-              <span className="block sm:inline">Kupi sad za $24.99</span>
+              <span className="block sm:inline">
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
+              </span>
               <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
+              {isDiscountActive && (
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  POPUST!
+                </div>
+              )}
             </a>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
               <Infinity className="w-4 h-4 text-pink-400" />
