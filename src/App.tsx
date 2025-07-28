@@ -114,11 +114,6 @@ function App() {
                     <div className="text-3xl font-bold text-green-400">
                       ${isDiscountActive ? '15' : '25'}
                     </div>
-                    {isDiscountActive && (
-                      <div className="text-xs text-red-400 font-bold mt-1">
-                        UŠTEDA $10!
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -341,15 +336,15 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative animate-pulse border-4 border-yellow-400"
             >
               <span className="block sm:inline">
-                Kupi sad za ${isDiscountActive ? '15' : '25'}
+                🚨 KUPI SAD ZA ${isDiscountActive ? '15' : '25'}
               </span>
-              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
+              <span className="block sm:inline sm:ml-2">- POSLEDNJI DANI!</span>
               {isDiscountActive && (
-                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                  POPUST!
+                <div className="absolute -top-4 -right-4 bg-red-500 text-white text-xs px-3 py-2 rounded-full animate-bounce border-2 border-yellow-400">
+                  🔥 SAMO ${timeLeft.days} DANA!
                 </div>
               )}
             </a>
