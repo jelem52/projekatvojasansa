@@ -94,18 +94,18 @@ function App() {
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-green-400 font-semibold text-lg">
-                      {isDiscountActive ? 'Ograničena ponuda!' : 'Regularna cena'}
+                    <div className="text-green-400 font-bold text-lg animate-pulse">
+                      {isDiscountActive ? '🔥 SAMO DANAS - OGRANIČENA PONUDA!' : 'Regularna cena'}
                     </div>
                     <div className="text-white text-sm">
-                      {isDiscountActive 
-                        ? 'Cena kursa je snižena sa $25 na samo $15' 
+                      {isDiscountActive
+                        ? '⚡ POSLEDNJA ŠANSA - Cena kursa je snižena sa $25 na samo $15'
                         : 'Cena kursa je $25'
                       }
                     </div>
                     {isDiscountActive && (
-                      <div className="text-red-400 text-xs mt-1 font-medium">
-                        Ponuda ističe za: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+                      <div className="text-red-400 text-sm mt-2 font-bold animate-pulse bg-red-500/20 px-3 py-1 rounded-full border border-red-400/50">
+                        ⏰ PONUDA ISTIČE ZA: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
                       </div>
                     )}
                   </div>
