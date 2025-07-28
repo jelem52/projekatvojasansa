@@ -94,18 +94,18 @@ function App() {
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-green-400 font-bold text-lg animate-pulse">
-                      {isDiscountActive ? '🔥 SAMO DANAS - OGRANIČENA PONUDA!' : 'Regularna cena'}
+                    <div className="text-green-400 font-semibold text-lg">
+                      {isDiscountActive ? 'Ograničena ponuda!' : 'Regularna cena'}
                     </div>
                     <div className="text-white text-sm">
-                      {isDiscountActive
-                        ? '⚡ POSLEDNJA ŠANSA - Cena kursa je snižena sa $25 na samo $15'
+                      {isDiscountActive 
+                        ? 'Cena kursa je snižena sa $25 na samo $15' 
                         : 'Cena kursa je $25'
                       }
                     </div>
                     {isDiscountActive && (
-                      <div className="text-red-400 text-sm mt-2 font-bold animate-pulse bg-red-500/20 px-3 py-1 rounded-full border border-red-400/50">
-                        ⏰ PONUDA ISTIČE ZA: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+                      <div className="text-red-400 text-xs mt-1 font-medium">
+                        Ponuda ističe za: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
                       </div>
                     )}
                   </div>
@@ -336,15 +336,15 @@ function App() {
               href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative animate-pulse border-4 border-yellow-400"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
             >
               <span className="block sm:inline">
-                🚨 KUPI SAD ZA ${isDiscountActive ? '15' : '25'}
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
               </span>
-              <span className="block sm:inline sm:ml-2">- POSLEDNJI DANI!</span>
+              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
               {isDiscountActive && (
-                <div className="absolute -top-4 -right-4 bg-red-500 text-white text-xs px-3 py-2 rounded-full animate-bounce border-2 border-yellow-400">
-                  🔥 SAMO ${timeLeft.days} DANA!
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  POPUST!
                 </div>
               )}
             </a>
