@@ -25,26 +25,23 @@ function App() {
   const [isDiscountActive, setIsDiscountActive] = useState(true);
 
   useEffect(() => {
-    // Set the countdown end date (4 days from now)
-    const countdownEnd = new Date();
-    countdownEnd.setDate(countdownEnd.getDate() + 4);
+    // Create a cycling countdown that resets every 4 days
+    const cycleLength = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
+    const startDate = new Date('2024-01-01').getTime(); // Fixed start date
     
     const timer = setInterval(() => {
       const now = new Date().getTime();
-      const distance = countdownEnd.getTime() - now;
+      const timeSinceStart = now - startDate;
+      const currentCyclePosition = timeSinceStart % cycleLength;
+      const timeLeftInCycle = cycleLength - currentCyclePosition;
       
-      if (distance < 0) {
-        setIsDiscountActive(false);
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        clearInterval(timer);
-      } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        setTimeLeft({ days, hours, minutes, seconds });
-      }
+      const days = Math.floor(timeLeftInCycle / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeftInCycle % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeftInCycle % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeftInCycle % (1000 * 60)) / 1000);
+      
+      setTimeLeft({ days, hours, minutes, seconds });
+      setIsDiscountActive(true); // Always active since it cycles
     }, 1000);
 
     return () => clearInterval(timer);
