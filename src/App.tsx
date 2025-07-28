@@ -94,9 +94,6 @@ function App() {
               <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 rounded-xl p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block animate-pulse">
-                      🔥 POPUST 40% - SAMO DANAS!
-                    </div>
                     <div className="text-green-400 font-semibold text-lg">
                       {isDiscountActive ? 'Ograničena ponuda!' : 'Regularna cena'}
                     </div>
