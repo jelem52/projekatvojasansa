@@ -25,30 +25,6 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Generate a secure download link
-    const downloadResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/generate-download-link`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (!downloadResponse.ok) {
-      throw new Error('Failed to generate download link');
-    }
-
-    const { downloadUrl, expiresAt } = await downloadResponse.json();
-    const expirationDate = new Date(expiresAt).toLocaleString('sr-RS', {
-      timeZone: 'Europe/Belgrade',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-
     const emailHtml = `
       <!DOCTYPE html>
       <html>
@@ -72,32 +48,19 @@ Deno.serve(async (req) => {
             </p>
             
             <p style="color: #374151; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
-              Čestitamo na kupovini kursa "Tvoja Šansa"! Vaša kupovina je uspešno završena i sada imate pristup celom kursu.
+              Čestitamo na kupovini kursa "Tvoja Šansa"! Vaša kupovina je uspešno završena.
             </p>
             
-            <!-- CTA Button -->
-            <div style="text-align: center; margin: 40px 0;">
-              <a href="${downloadUrl}" 
-                 style="display: inline-block; background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%); color: white; text-decoration: none; padding: 16px 32px; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: all 0.3s ease;">
-                🚀 Pristupite kursu sada
-              </a>
-            </div>
-            
-            <div style="background-color: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px; margin: 20px 0;">
-              <p style="color: #92400e; font-size: 14px; margin: 0; font-weight: 500;">
-                ⚠️ <strong>Važno:</strong> Ovaj link je jedinstven za vas i može se koristiti samo jednom. Link ističe ${expirationDate}.
-              </p>
-            </div>
-            
             <div style="background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin: 30px 0;">
-              <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Šta vas čeka u kursu:</h3>
-              <ul style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Kompletne lekcije o komunikaciji sa devojkama</li>
-                <li style="margin-bottom: 8px;">Tehnike za izgradnju samopouzdanja</li>
-                <li style="margin-bottom: 8px;">Psihologija privlačnosti i ženskog uma</li>
-                <li style="margin-bottom: 8px;">Praktični saveti za realne situacije</li>
-                <li>Konkretne strategije za transformaciju vašeg ljubavnog života</li>
-              </ul>
+              <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Pristup kursu:</h3>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0;">
+                Kontaktiraćemo vas uskoro sa linkom za pristup kursu preko Instagram-a ili email-a.
+              </p>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0;">
+                Pratite nas na 
+                <a href="https://www.instagram.com/tvojaa_sansa" style="color: #ec4899; text-decoration: none;">@tvojaa_sansa</a>
+                za najnovije savete i ažuriranja.
+              </p>
             </div>
             
             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
@@ -117,36 +80,17 @@ Deno.serve(async (req) => {
       </html>
     `;
 
-    // In a real implementation, you would use a service like Resend, SendGrid, or similar
-    // For now, we'll just log the email content and return success
-    console.log('Email to send:', {
+    // TODO: Replace this with actual email sending service
+    console.log('Course access email:', {
       to: email,
       subject: 'Pristup kursu - Tvoja Šansa 🎉',
       html: emailHtml
     });
 
-    // TODO: Replace this with actual email sending service
-    // Example with Resend:
-    // const response = await fetch('https://api.resend.com/emails', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     from: 'Tvoja Šansa <noreply@yourdomain.com>',
-    //     to: [email],
-    //     subject: 'Pristup kursu - Tvoja Šansa 🎉',
-    //     html: emailHtml,
-    //   }),
-    // });
-
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Email sent successfully',
-        // For development - remove this in production
-        emailPreview: emailHtml 
+        message: 'Course email sent successfully'
       }),
       { 
         status: 200, 
@@ -155,7 +99,7 @@ Deno.serve(async (req) => {
     );
 
   } catch (error: any) {
-    console.error('Error sending email:', error);
+    console.error('Error sending course email:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
