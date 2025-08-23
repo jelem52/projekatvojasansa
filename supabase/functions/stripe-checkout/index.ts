@@ -1,8 +1,6 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import Stripe from 'npm:stripe@17.7.0';
-import { createClient } from 'npm:@supabase/supabase-js@2.49.1';
 
-const supabase = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '');
 const stripeSecret = Deno.env.get('STRIPE_SECRET_KEY')!;
 const stripe = new Stripe(stripeSecret, {
   appInfo: {
@@ -36,7 +34,7 @@ function corsResponse(body: string | object | null, status = 200) {
 Deno.serve(async (req) => {
   try {
     if (req.method === 'OPTIONS') {
-      return corsResponse({}, 204);
+      return corsResponse(null, 204);
     }
 
     if (req.method !== 'POST') {
@@ -73,20 +71,6 @@ Deno.serve(async (req) => {
       customer = await stripe.customers.create({
         email: customer_email,
       });
-    }
-
-    // Store customer in database
-    const { error: customerError } = await supabase
-      .from('stripe_customers')
-      .upsert({
-        customer_id: customer.id,
-        email: customer_email,
-      }, {
-        onConflict: 'customer_id',
-      });
-
-    if (customerError) {
-      console.error('Error storing customer:', customerError);
     }
 
     // Create Checkout Session

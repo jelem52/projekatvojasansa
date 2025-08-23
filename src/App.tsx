@@ -23,13 +23,14 @@ function App() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isDiscountActive, setIsDiscountActive] = useState(true);
 
+  // Check URL for success page
   useEffect(() => {
-    // Check URL for success page
     if (window.location.pathname === '/success') {
       setCurrentPage('success');
     }
   }, []);
 
+  // Countdown timer
   useEffect(() => {
     // Create a cycling countdown that resets every 4 days
     const cycleLength = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
