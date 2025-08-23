@@ -1,38 +1,24 @@
-import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { supabase } from './lib/supabase';
-import { AuthForm } from './components/AuthForm';
-import { ProductCard } from './components/ProductCard';
+import { CheckoutForm } from './components/CheckoutForm';
 import { SuccessPage } from './components/SuccessPage';
-import { STRIPE_PRODUCTS } from './stripe-config';
-import type { User } from '@supabase/supabase-js';
 import { 
   Heart, 
   Users, 
   MessageCircle, 
   Target, 
   Star, 
-  CheckCircle, 
   Play,
   Instagram,
   ArrowRight,
   Zap,
-  Trophy,
-  BookOpen,
   Video,
-  Infinity,
   X,
-  LogOut
+  CheckCircle
 } from 'lucide-react';
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
-  const [showAuth, setShowAuth] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'success'>('home');
-  const [userOrders, setUserOrders] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<'home' | 'checkout' | 'success'>('home');
   const [showVideo, setShowVideo] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isDiscountActive, setIsDiscountActive] = useState(true);
@@ -42,27 +28,7 @@ function App() {
     if (window.location.pathname === '/success') {
       setCurrentPage('success');
     }
-
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      fetchUserOrders();
-    }
-  }, [user]);
 
   useEffect(() => {
     // Create a cycling countdown that resets every 4 days
@@ -87,45 +53,8 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  const fetchUserOrders = useCallback(async () => {
-    if (!user) return;
-
-    try {
-      const { data, error } = await supabase
-        .from('stripe_user_orders')
-        .select('*')
-        .order('order_date', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching orders:', error);
-      } else {
-        setUserOrders(data || []);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }, [user]);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setCurrentPage('home');
-    window.history.pushState({}, '', '/');
-  };
-
-  const userHasAccess = userOrders.some(order => 
-    order.payment_status === 'paid' && order.order_status === 'completed'
-  );
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-pink-400 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  if (showAuth) {
-    return <AuthForm mode={authMode} onToggleMode={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')} />;
+  if (currentPage === 'checkout') {
+    return <CheckoutForm onBack={() => setCurrentPage('home')} />;
   }
 
   if (currentPage === 'success') {
@@ -147,58 +76,9 @@ function App() {
               />
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              {user ? (
-                <div className="flex items-center space-x-4">
-                  <div className="text-white text-sm">
-                    <span className="text-gray-300">Dobrodošao,</span>
-                    <br />
-                    <span className="font-semibold">{user.email}</span>
-                  </div>
-                  <button
-                    onClick={handleSignOut}
-                    className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300 flex items-center space-x-2"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Odjavi se</span>
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => setShowAuth(true)}
-                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-                >
-                  Uloguj se
-                </button>
-              )}
-            </div>
           </div>
         </div>
       </header>
-
-      {/* Products Section */}
-      {user && (
-        <section className="py-20 bg-black/20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h3 className="text-4xl font-bold text-white mb-4">Dostupni kursevi</h3>
-              <p className="text-xl text-gray-300">
-                Izaberite kurs koji će transformisati vaš ljubavni život
-              </p>
-            </div>
-            
-            <div className="grid gap-8 max-w-lg mx-auto">
-              {STRIPE_PRODUCTS.map((product) => (
-                <ProductCard 
-                  key={product.id} 
-                  product={product} 
-                  userHasAccess={userHasAccess}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Hero Section */}
       <section className="relative py-20">
@@ -245,27 +125,18 @@ function App() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                {user ? (
-                  userHasAccess ? (
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center space-x-2">
-                      <CheckCircle className="w-5 h-5" />
-                      <span>Imate pristup kursu</span>
+                <button
+                  onClick={() => setCurrentPage('checkout')}
+                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2 relative"
+                >
+                  <span>Kupi sad za €{isDiscountActive ? '11' : '15'}</span>
+                  <ArrowRight className="w-5 h-5" />
+                  {isDiscountActive && (
+                    <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                      POPUST!
                     </div>
-                  ) : (
-                    <div className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2">
-                      <span>Pogledajte dostupne kurseve ispod</span>
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  )
-                ) : (
-                  <button
-                    onClick={() => setShowAuth(true)}
-                    className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
-                  >
-                    <span>Uloguj se i kupi</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                )}
+                  )}
+                </button>
                 <button className="border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10">
                   Saznaj više
                 </button>
@@ -397,33 +268,20 @@ function App() {
           </div>
 
           <div className="text-center mt-12">
-            {user ? (
-              userHasAccess ? (
-                <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-10 py-4 rounded-full font-semibold text-lg inline-flex items-center space-x-2">
-                  <CheckCircle className="w-6 h-6" />
-                  <span>Imate pristup kursu</span>
+            <button
+              onClick={() => setCurrentPage('checkout')}
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
+            >
+              <span className="block text-center">Pristup celom kursu</span>
+              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
+                Kupi sad za €{isDiscountActive ? '11' : '15'}
+              </span>
+              {isDiscountActive && (
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  POPUST!
                 </div>
-              ) : (
-                <div className="text-white text-lg">
-                  Pogledajte dostupne kurseve iznad ↑
-                </div>
-              )
-            ) : (
-              <button
-                onClick={() => setShowAuth(true)}
-                className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
-              >
-                <span className="block text-center">Pristup celom kursu</span>
-                <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
-                  Uloguj se za €{isDiscountActive ? '11' : '15'}
-                </span>
-                {isDiscountActive && (
-                  <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                    POPUST!
-                  </div>
-                )}
-              </button>
-            )}
+              )}
+            </button>
           </div>
         </div>
       </section>
@@ -481,36 +339,23 @@ function App() {
           </p>
           
           <div className="space-y-4">
-            {user ? (
-              userHasAccess ? (
-                <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl inline-flex items-center space-x-2">
-                  <CheckCircle className="w-6 h-6" />
-                  <span>Imate pristup kursu - Počnite transformaciju</span>
+            <button
+              onClick={() => setCurrentPage('checkout')}
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
+            >
+              <span className="block sm:inline">
+                Kupi sad za €{isDiscountActive ? '11' : '15'}
+              </span>
+              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
+              {isDiscountActive && (
+                <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                  POPUST!
                 </div>
-              ) : (
-                <div className="text-white text-lg">
-                  Pogledajte dostupne kurseve iznad ↑
-                </div>
-              )
-            ) : (
-              <button
-                onClick={() => setShowAuth(true)}
-                className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
-              >
-                <span className="block sm:inline">
-                  Kupi sad za €{isDiscountActive ? '11' : '15'}
-                </span>
-                <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
-                {isDiscountActive && (
-                  <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                    POPUST!
-                  </div>
-                )}
-              </button>
-            )}
+              )}
+            </button>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
-              <Infinity className="w-4 h-4 text-pink-400" />
-              <span>Doživotni pristup kursu</span>
+              <CheckCircle className="w-4 h-4 text-pink-400" />
+              <span>Trenutni pristup kursu</span>
             </div>
           </div>
         </div>

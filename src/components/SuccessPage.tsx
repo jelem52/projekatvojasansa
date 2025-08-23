@@ -1,34 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { CheckCircle, ArrowRight, Home } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import React from 'react';
+import { CheckCircle, ArrowRight, Home, Mail } from 'lucide-react';
 
 export function SuccessPage() {
-  const [userOrders, setUserOrders] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchUserOrders();
-  }, []);
-
-  const fetchUserOrders = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('stripe_user_orders')
-        .select('*')
-        .order('order_date', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching orders:', error);
-      } else {
-        setUserOrders(data || []);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-4">
       <div className="max-w-2xl w-full">
@@ -41,7 +14,7 @@ export function SuccessPage() {
               Čestitamo! 🎉
             </h1>
             <p className="text-xl text-gray-300 mb-6">
-              Vaša kupovina je uspešno završena. Sada imate pristup kursu "Tvoja Šansa"!
+              Vaša kupovina je uspešno završena. Pristup kursu "Tvoja Šansa" će biti poslat na vašu email adresu!
             </p>
           </div>
 
@@ -52,47 +25,41 @@ export function SuccessPage() {
                 <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm font-bold">1</span>
                 </div>
-                <p className="text-gray-300">Pristupite kursu i počnite sa prvom lekcijom</p>
+                <p className="text-gray-300">Proverite vašu email adresu za link za pristup kursu</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm font-bold">2</span>
                 </div>
-                <p className="text-gray-300">Pratite nas na društvenim mrežama za dodatne savete</p>
+                <p className="text-gray-300">Pristupite kursu i počnite sa prvom lekcijom</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-sm font-bold">3</span>
+                </div>
+                <p className="text-gray-300">Pratite nas na društvenim mrežama za dodatne savete</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-white text-sm font-bold">4</span>
                 </div>
                 <p className="text-gray-300">Primenite naučeno i transformišite svoj ljubavni život</p>
               </div>
             </div>
           </div>
 
-          {!loading && userOrders.length > 0 && (
-            <div className="bg-black/20 rounded-xl p-6 mb-8">
-              <h3 className="text-lg font-semibold text-white mb-4">Vaše kupovine</h3>
-              <div className="space-y-2">
-                {userOrders.map((order) => (
-                  <div key={order.order_id} className="flex justify-between items-center text-sm">
-                    <span className="text-gray-300">Kurs "Tvoja Šansa"</span>
-                    <span className="text-green-400 font-semibold">
-                      €{(order.amount_total / 100).toFixed(2)}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <div className="bg-blue-500/10 border border-blue-400/30 rounded-xl p-6 mb-8">
+            <div className="flex items-center justify-center space-x-3 mb-3">
+              <Mail className="w-5 h-5 text-blue-400" />
+              <h3 className="text-lg font-semibold text-white">Važna napomena</h3>
             </div>
-          )}
+            <p className="text-gray-300 text-sm">
+              Ukoliko ne vidite email u vašem inbox-u, proverite spam/junk folder. 
+              Email sa pristupom kursu će stići u roku od 5 minuta.
+            </p>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={() => window.location.href = '/'}
-              className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
-            >
-              <ArrowRight className="w-5 h-5" />
-              <span>Pristup kursu</span>
-            </button>
             <button
               onClick={() => window.location.href = '/'}
               className="flex-1 border-2 border-white/30 hover:border-white/50 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:bg-white/10 flex items-center justify-center space-x-2"
