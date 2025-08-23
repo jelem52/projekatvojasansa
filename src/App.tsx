@@ -393,6 +393,9 @@ function App() {
           </div>
           
           <div className="border-t border-white/10 mt-8 pt-8 text-center">
+            <p className="text-gray-300 mb-4">
+              Ukoliko želite bezkartično plaćanje javite nam se na instagram
+            </p>
             <p className="text-gray-400">
               © 2024 Tvoja šansa. Sva prava zadržana. | Transformišemo živote od 2020.
             </p>
