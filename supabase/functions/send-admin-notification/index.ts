@@ -16,24 +16,14 @@ Deno.serve(async (req) => {
       return new Response('Method not allowed', { status: 405, headers: corsHeaders });
     }
 
-    const { customerEmail, customerName, amount, currency } = await req.json();
+    const { email, customerName } = await req.json();
 
-    if (!customerEmail) {
+    if (!email) {
       return new Response(
-        JSON.stringify({ error: 'Customer email is required' }),
+        JSON.stringify({ error: 'Email is required' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
-
-    const adminEmail = 'tvojaasansa@gmail.com';
-    const currentDate = new Date().toLocaleString('sr-RS', {
-      timeZone: 'Europe/Belgrade',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -41,84 +31,89 @@ Deno.serve(async (req) => {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nova kupovina - Tvoja Šansa</title>
+        <title>Pristup kursu - Tvoja Šansa</title>
       </head>
       <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc;">
         <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
           <!-- Header -->
-          <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 30px; text-align: center;">
-            <h1 style="color: white; font-size: 24px; font-weight: bold; margin: 0 0 10px 0;">💰 Nova kupovina!</h1>
-            <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin: 0;">Tvoja Šansa - Kurs</p>
+          <div style="background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%); padding: 40px 30px; text-align: center;">
+            <h1 style="color: white; font-size: 28px; font-weight: bold; margin: 0 0 10px 0;">Dobrodošao u "Tvoja Šansa"! 🎉</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin: 0;">Tvoja transformacija počinje sada</p>
           </div>
           
           <!-- Content -->
-          <div style="padding: 30px;">
-            <div style="background-color: #f1f5f9; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-              <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Detalji kupovine:</h3>
-              <div style="space-y: 8px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                  <span style="color: #6b7280; font-weight: 500;">Email kupca:</span>
-                  <span style="color: #1f2937; font-weight: 600;">${customerEmail}</span>
-                </div>
-                ${customerName ? `
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                  <span style="color: #6b7280; font-weight: 500;">Ime:</span>
-                  <span style="color: #1f2937; font-weight: 600;">${customerName}</span>
-                </div>
-                ` : ''}
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                  <span style="color: #6b7280; font-weight: 500;">Iznos:</span>
-                  <span style="color: #1f2937; font-weight: 600;">${amount ? `${(amount / 100).toFixed(2)} ${currency?.toUpperCase() || 'EUR'}` : '€11.00'}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                  <span style="color: #6b7280; font-weight: 500;">Datum:</span>
-                  <span style="color: #1f2937; font-weight: 600;">${currentDate}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #6b7280; font-weight: 500;">Proizvod:</span>
-                  <span style="color: #1f2937; font-weight: 600;">Tvoja Šansa - Kurs</span>
-                </div>
-              </div>
-            </div>
+          <div style="padding: 40px 30px;">
+            <p style="color: #374151; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              Pozdrav${customerName ? ` ${customerName}` : ''},
+            </p>
             
-            <div style="background-color: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 16px;">
-              <p style="color: #065f46; font-size: 14px; margin: 0; font-weight: 500;">
-                ✅ <strong>Kupovina je uspešno završena!</strong> Kurs je automatski poslat kupcu na email adresu.
+            <p style="color: #374151; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+              Čestitamo na kupovini kursa "Tvoja Šansa"! Vaša kupovina je uspešno završena.
+            </p>
+            
+            <div style="background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin: 30px 0;">
+              <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Pristup kursu:</h3>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0;">
+                Kontaktiraćemo vas uskoro sa linkom za pristup kursu preko Instagram-a ili email-a.
+              </p>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0;">
+                Pratite nas na 
+                <a href="https://www.instagram.com/tvojaa_sansa" style="color: #ec4899; text-decoration: none;">@tvojaa_sansa</a>
+                za najnovije savete i ažuriranja.
               </p>
             </div>
+            
+            <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
+              Ukoliko imate bilo kakva pitanja, slobodno nas kontaktirajte preko Instagram-a 
+              <a href="https://www.instagram.com/tvojaa_sansa" style="color: #ec4899; text-decoration: none;">@tvojaa_sansa</a>
+            </p>
+          </div>
+          
+          <!-- Footer -->
+          <div style="background-color: #f8fafc; padding: 20px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+            <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+              © 2024 Tvoja šansa. Sva prava zadržana.
+            </p>
           </div>
         </div>
       </body>
       </html>
     `;
 
-    // TODO: Replace this with actual email sending service
-    // For now, we'll log the notification email
-    console.log('Admin notification email:', {
-      to: adminEmail,
-      subject: `Nova kupovina - ${customerEmail}`,
-      html: emailHtml
+    // Send email using Resend
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    
+    if (!resendApiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+
+    const emailResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Tvoja Šansa <onboarding@resend.dev>',
+        to: [email],
+        subject: 'Pristup kursu - Tvoja Šansa 🎉',
+        html: emailHtml,
+      }),
     });
 
-    // In production, you would send the actual email here:
-    // const response = await fetch('https://api.resend.com/emails', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     from: 'Tvoja Šansa <noreply@yourdomain.com>',
-    //     to: [adminEmail],
-    //     subject: `Nova kupovina - ${customerEmail}`,
-    //     html: emailHtml,
-    //   }),
-    // });
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.json();
+      console.error('Resend API error:', errorData);
+      throw new Error(`Failed to send email: ${errorData.message || 'Unknown error'}`);
+    }
+
+    const emailResult = await emailResponse.json();
+    console.log('Course email sent successfully:', emailResult.id);
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Admin notification sent successfully'
+        message: 'Course email sent successfully'
       }),
       { 
         status: 200, 
@@ -127,7 +122,7 @@ Deno.serve(async (req) => {
     );
 
   } catch (error: any) {
-    console.error('Error sending admin notification:', error);
+    console.error('Error sending course email:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
