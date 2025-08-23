@@ -1,119 +1,134 @@
-import React, { useState } from 'react';
-import { supabase } from '../lib/supabase';
+import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 
-interface CheckoutFormProps {
-  onSuccess: () => void;
-}
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
 
-export function CheckoutForm({ onSuccess }: CheckoutFormProps) {
-  const [email, setEmail] = useState('');
-  const [customerName, setCustomerName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    try {
-      if (!email) {
-        throw new Error('Email je obavezan');
-      }
-
-      // Call Stripe checkout function
-      const { data, error: functionError } = await supabase.functions.invoke('stripe-checkout', {
-        body: { 
-          email,
-          customerName: customerName || undefined
-        }
-      });
-
-      if (functionError) {
-        console.error('Supabase function error:', functionError);
-        throw new Error(functionError.message || 'Greška pri kreiranju checkout sesije');
-      }
-
-      if (!data?.url) {
-        console.error('No checkout URL returned:', data);
-        throw new Error('Greška pri kreiranju checkout sesije');
-      }
-
-      // Redirect to Stripe checkout
-      window.location.href = data.url;
-      
-    } catch (error: any) {
-      console.error('Checkout error:', error);
-      setError(error.message || 'Greška pri kreiranju checkout sesije');
-    } finally {
-      setIsLoading(false);
+Deno.serve(async (req) => {
+  try {
+    if (req.method === 'OPTIONS') {
+      return new Response('ok', { headers: corsHeaders });
     }
-  };
 
-  return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Kupi Kurs</h2>
-        <p className="text-gray-600">Transformiši svoj život sa "Tvoja Šansa"</p>
-      </div>
+    if (req.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405, headers: corsHeaders });
+    }
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Email adresa *
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
-            placeholder="tvoj@email.com"
-          />
-        </div>
+    const { email, customerName } = await req.json();
 
-        <div>
-          <label htmlFor="customerName" className="block text-sm font-medium text-gray-700 mb-2">
-            Ime (opciono)
-          </label>
-          <input
-            type="text"
-            id="customerName"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
-            placeholder="Tvoje ime"
-          />
-        </div>
+    if (!email) {
+      return new Response(
+        JSON.stringify({ error: 'Email is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-600 text-sm">{error}</p>
+    const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pristup kursu - Tvoja Šansa</title>
+      </head>
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <div style="background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%); padding: 40px 30px; text-align: center;">
+            <h1 style="color: white; font-size: 28px; font-weight: bold; margin: 0 0 10px 0;">Dobrodošao u "Tvoja Šansa"! 🎉</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin: 0;">Tvoja transformacija počinje sada</p>
           </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-4 px-6 rounded-lg hover:from-pink-600 hover:to-red-600 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-        >
-          {isLoading ? (
-            <div className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-              Učitava...
+          
+          <!-- Content -->
+          <div style="padding: 40px 30px;">
+            <p style="color: #374151; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+              Pozdrav${customerName ? ` ${customerName}` : ''},
+            </p>
+            
+            <p style="color: #374151; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
+              Čestitamo na kupovini kursa "Tvoja Šansa"! Vaša kupovina je uspešno završena.
+            </p>
+            
+            <div style="background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin: 30px 0;">
+              <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Pristup kursu:</h3>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0;">
+                Kontaktiraćemo vas uskoro sa linkom za pristup kursu preko Instagram-a ili email-a.
+              </p>
+              <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0;">
+                Pratite nas na 
+                <a href="https://www.instagram.com/tvojaa_sansa" style="color: #ec4899; text-decoration: none;">@tvojaa_sansa</a>
+                za najnovije savete i ažuriranja.
+              </p>
             </div>
-          ) : (
-            'Plati €11.00'
-          )}
-        </button>
-      </form>
+            
+            <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
+              Ukoliko imate bilo kakva pitanja, slobodno nas kontaktirajte preko Instagram-a 
+              <a href="https://www.instagram.com/tvojaa_sansa" style="color: #ec4899; text-decoration: none;">@tvojaa_sansa</a>
+            </p>
+          </div>
+          
+          <!-- Footer -->
+          <div style="background-color: #f8fafc; padding: 20px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+            <p style="color: #9ca3af; font-size: 12px; margin: 0;">
+              © 2024 Tvoja šansa. Sva prava zadržana.
+            </p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
 
-      <div className="mt-6 text-center">
-        <p className="text-xs text-gray-500">
-          Sigurna kupovina preko Stripe platforme
-        </p>
-      </div>
-    </div>
-  );
-}
+    // Send email using Resend
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    
+    if (!resendApiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+
+    const emailResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'noreply@yourdomain.com',
+        to: [email],
+        subject: 'Pristup kursu - Tvoja Šansa 🎉',
+        html: emailHtml,
+      }),
+    });
+
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.json();
+      console.error('Resend API error:', errorData);
+      throw new Error(`Failed to send email: ${errorData.message || 'Unknown error'}`);
+    }
+
+    const emailResult = await emailResponse.json();
+    console.log('Course email sent successfully:', emailResult.id);
+
+    return new Response(
+      JSON.stringify({ 
+        success: true, 
+        message: 'Course email sent successfully'
+      }),
+      { 
+        status: 200, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
+    );
+
+  } catch (error: any) {
+    console.error('Error sending course email:', error);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { 
+        status: 500, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
+    );
+  }
+});
