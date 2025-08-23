@@ -91,6 +91,10 @@ Deno.serve(async (req) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'noreply@yourdomain.com',
         to: [email],
         subject: 'Pristup kursu - Tvoja Šansa 🎉',
         html: emailHtml,
