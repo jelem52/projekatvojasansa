@@ -1,10 +1,6 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CheckoutButton } from './components/CheckoutButton';
-import { Success } from './pages/Success';
-import { products } from './stripe-config';
 import { 
   Heart, 
   Users, 
@@ -22,8 +18,6 @@ import {
   Infinity,
   X
 } from 'lucide-react';
-
-const mainProduct = products[0]; // Tvoja Šansa product
 
 function App() {
   const [showVideo, setShowVideo] = useState(false);
@@ -53,14 +47,8 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  const HomePage = () => (
+  return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <HomeContent />
-    </div>
-  );
-
-  const HomeContent = () => (
-    <>
       {/* Header */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20"></div>
@@ -74,18 +62,14 @@ function App() {
               />
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
-            <CheckoutButton
-              priceId={mainProduct.priceId}
-              mode={mainProduct.mode}
-              price={mainProduct.price}
-              currency={mainProduct.currency}
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              <span className="flex items-center space-x-2">
-                <span>Kupi sad</span>
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            </CheckoutButton>
+              Kupi sad
+            </a>
           </div>
         </div>
       </header>
@@ -115,8 +99,8 @@ function App() {
                     </div>
                     <div className="text-white text-sm">
                       {isDiscountActive 
-                        ? `Cena kursa je snižena sa €${(mainProduct.price * 1.5).toFixed(2)} na samo €${mainProduct.price}` 
-                        : `Cena kursa je €${mainProduct.price}`
+                        ? 'Cena kursa je snižena sa $25 na samo $15' 
+                        : 'Cena kursa je $25'
                       }
                     </div>
                     {isDiscountActive && (
@@ -126,27 +110,24 @@ function App() {
                     )}
                   </div>
                   <div className="text-right">
-                    <div className="text-gray-400 text-lg line-through">€{(mainProduct.price * 1.5).toFixed(2)}</div>
+                    <div className="text-gray-400 text-lg line-through">$25</div>
                     <div className="text-3xl font-bold text-green-400">
-                      €{mainProduct.price}
+                      ${isDiscountActive ? '15' : '25'}
                     </div>
                   </div>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <CheckoutButton
-                  priceId={mainProduct.priceId}
-                  mode={mainProduct.mode}
-                  price={mainProduct.price}
-                  currency={mainProduct.currency}
+                <a 
+                  href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
                 >
-                  <>
-                    <span>Nauči kako</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </>
-                </CheckoutButton>
+                  <span>Nauči kako</span>
+                  <ArrowRight className="w-5 h-5" />
+                </a>
                 <button className="border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10">
                   Saznaj više
                 </button>
@@ -278,25 +259,22 @@ function App() {
           </div>
 
           <div className="text-center mt-12">
-            <CheckoutButton
-              priceId={mainProduct.priceId}
-              mode={mainProduct.mode}
-              price={mainProduct.price}
-              currency={mainProduct.currency}
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
             >
-              <div className="relative">
-                <span className="block text-center">Pristup celom kursu</span>
-                <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
-                  Kupi sad za €{mainProduct.price}
-                </span>
+              <span className="block text-center">Pristup celom kursu</span>
+              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
+              </span>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                   POPUST!
                 </div>
               )}
-              </div>
-            </CheckoutButton>
+            </a>
           </div>
         </div>
       </section>
@@ -354,25 +332,22 @@ function App() {
           </p>
           
           <div className="space-y-4">
-            <CheckoutButton
-              priceId={mainProduct.priceId}
-              mode={mainProduct.mode}
-              price={mainProduct.price}
-              currency={mainProduct.currency}
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
             >
-              <div className="relative">
-                <span className="block sm:inline">
-                  Kupi sad za €{mainProduct.price}
-                </span>
-                <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
+              <span className="block sm:inline">
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
+              </span>
+              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                   POPUST!
                 </div>
               )}
-              </div>
-            </CheckoutButton>
+            </a>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
               <Infinity className="w-4 h-4 text-pink-400" />
               <span>Doživotni pristup kursu</span>
@@ -424,17 +399,8 @@ function App() {
           </div>
         </div>
       </footer>
-    </>
-  );
-
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/success" element={<Success />} />
-      </Routes>
       <Analytics />
-    </Router>
+    </div>
   );
 }
 
