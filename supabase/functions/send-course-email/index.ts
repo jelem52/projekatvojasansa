@@ -25,8 +25,29 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Course Google Docs link - replace this with your actual Google Docs link
-    const courseLink = 'https://docs.google.com/document/d/YOUR_GOOGLE_DOCS_ID/edit?usp=sharing';
+    // Generate a secure download link
+    const downloadResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/generate-download-link`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!downloadResponse.ok) {
+      throw new Error('Failed to generate download link');
+    }
+
+    const { downloadUrl, expiresAt } = await downloadResponse.json();
+    const expirationDate = new Date(expiresAt).toLocaleString('sr-RS', {
+      timeZone: 'Europe/Belgrade',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -56,10 +77,16 @@ Deno.serve(async (req) => {
             
             <!-- CTA Button -->
             <div style="text-align: center; margin: 40px 0;">
-              <a href="${courseLink}" 
+              <a href="${downloadUrl}" 
                  style="display: inline-block; background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%); color: white; text-decoration: none; padding: 16px 32px; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: all 0.3s ease;">
-                🚀 Pristupite kursu sada
+                🚀 Preuzmite kurs sada
               </a>
+            </div>
+            
+            <div style="background-color: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px; margin: 20px 0;">
+              <p style="color: #92400e; font-size: 14px; margin: 0; font-weight: 500;">
+                ⚠️ <strong>Važno:</strong> Ovaj link je jedinstven za vas i može se koristiti samo jednom. Link ističe ${expirationDate}.
+              </p>
             </div>
             
             <div style="background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin: 30px 0;">
@@ -71,12 +98,6 @@ Deno.serve(async (req) => {
                 <li style="margin-bottom: 8px;">Praktični saveti za realne situacije</li>
                 <li>Konkretne strategije za transformaciju vašeg ljubavnog života</li>
               </ul>
-            </div>
-            
-            <div style="background-color: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 16px; margin: 20px 0;">
-              <p style="color: #92400e; font-size: 14px; margin: 0; font-weight: 500;">
-                💡 <strong>Savет:</strong> Sačuvajte ovaj email i link za buduće reference. Možete pristupiti kursu bilo kada.
-              </p>
             </div>
             
             <p style="color: #6b7280; font-size: 14px; line-height: 1.6; margin: 30px 0 0 0;">
