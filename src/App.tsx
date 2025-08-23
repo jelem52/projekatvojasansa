@@ -352,6 +352,20 @@ function App() {
               <Infinity className="w-4 h-4 text-pink-400" />
               <span>Doživotni pristup kursu</span>
             </div>
+            
+            <div className="mt-6 p-4 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-400/30 rounded-xl">
+              <p className="text-blue-300 text-sm font-medium">
+                💳 Ukoliko želite bezkartično plaćanje javite nam se na 
+                <a 
+                  href="https://www.instagram.com/tvojaa_sansa?igsh=MWltdmtrd2h1ejlvNA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-200 hover:text-white underline ml-1 transition-colors duration-300"
+                >
+                  Instagram
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
