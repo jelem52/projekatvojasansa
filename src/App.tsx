@@ -118,6 +118,20 @@ function App() {
                 </div>
               </div>
               
+              <div className="mt-4 p-4 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-400/30 rounded-xl">
+                <p className="text-blue-300 text-sm font-medium">
+                  💳 Ukoliko želite bezkartično plaćanje javite nam se na 
+                  <a 
+                    href="https://www.instagram.com/tvojaa_sansa?igsh=MWltdmtrd2h1ejlvNA=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-200 hover:text-white underline ml-1 transition-colors duration-300"
+                  >
+                    Instagram
+                  </a>
+                </p>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="https://buy.stripe.com/14AaEZgvA14X9Ak9ONaZi02"
@@ -353,19 +367,6 @@ function App() {
               <span>Doživotni pristup kursu</span>
             </div>
             
-            <div className="mt-6 p-4 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-400/30 rounded-xl">
-              <p className="text-blue-300 text-sm font-medium">
-                💳 Ukoliko želite bezkartično plaćanje javite nam se na 
-                <a 
-                  href="https://www.instagram.com/tvojaa_sansa?igsh=MWltdmtrd2h1ejlvNA=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-200 hover:text-white underline ml-1 transition-colors duration-300"
-                >
-                  Instagram
-                </a>
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -407,9 +408,6 @@ function App() {
           </div>
           
           <div className="border-t border-white/10 mt-8 pt-8 text-center">
-            <p className="text-gray-300 mb-4">
-              Ukoliko želite bezkartično plaćanje javite nam se na instagram
-            </p>
             <p className="text-gray-400">
               © 2024 Tvoja šansa. Sva prava zadržana. | Transformišemo živote od 2020.
             </p>
