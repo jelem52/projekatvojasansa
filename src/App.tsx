@@ -63,7 +63,7 @@ function App() {
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
             <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              href="https://buy.stripe.com/14AaEZgvA14X9Ak9ONaZi02"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
@@ -99,8 +99,8 @@ function App() {
                     </div>
                     <div className="text-white text-sm">
                       {isDiscountActive 
-                        ? 'Cena kursa je snižena sa $25 na samo $15' 
-                        : 'Cena kursa je $25'
+                        ? 'Cena kursa je snižena sa €25 na samo €11' 
+                        : 'Cena kursa je €25'
                       }
                     </div>
                     {isDiscountActive && (
@@ -110,9 +110,9 @@ function App() {
                     )}
                   </div>
                   <div className="text-right">
-                    <div className="text-gray-400 text-lg line-through">$25</div>
+                    <div className="text-gray-400 text-lg line-through">€25</div>
                     <div className="text-3xl font-bold text-green-400">
-                      ${isDiscountActive ? '15' : '25'}
+                      €{isDiscountActive ? '11' : '25'}
                     </div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ function App() {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
-                  href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+                  href="https://buy.stripe.com/14AaEZgvA14X9Ak9ONaZi02"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
@@ -260,14 +260,14 @@ function App() {
 
           <div className="text-center mt-12">
             <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              href="https://buy.stripe.com/14AaEZgvA14X9Ak9ONaZi02"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
             >
               <span className="block text-center">Pristup celom kursu</span>
               <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
-                Kupi sad za ${isDiscountActive ? '15' : '25'}
+                Kupi sad za €{isDiscountActive ? '11' : '25'}
               </span>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
@@ -333,13 +333,13 @@ function App() {
           
           <div className="space-y-4">
             <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              href="https://buy.stripe.com/14AaEZgvA14X9Ak9ONaZi02"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
             >
               <span className="block sm:inline">
-                Kupi sad za ${isDiscountActive ? '15' : '25'}
+                Kupi sad za €{isDiscountActive ? '11' : '25'}
               </span>
               <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
               {isDiscountActive && (
