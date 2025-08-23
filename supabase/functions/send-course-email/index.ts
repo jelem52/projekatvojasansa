@@ -80,12 +80,31 @@ Deno.serve(async (req) => {
       </html>
     `;
 
-    // TODO: Replace this with actual email sending service
-    console.log('Course access email:', {
-      to: email,
-      subject: 'Pristup kursu - Tvoja Šansa 🎉',
-      html: emailHtml
+    // Send email using Resend
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    
+    if (!resendApiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+
+    const emailResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        to: [email],
+        subject: 'Pristup kursu - Tvoja Šansa 🎉',
+        html: emailHtml,
+      }),
     });
+
+    if (!emailResponse.ok) {
+      const errorData = await emailResponse.json();
+      console.error('Resend API error:', errorData);
+      throw new Error(`Failed to send email: ${errorData.message || 'Unknown error'}`);
+    }
+
+    const emailResult = await emailResponse.json();
+    console.log('Course email sent successfully:', emailResult.id);
 
     return new Response(
       JSON.stringify({ 
