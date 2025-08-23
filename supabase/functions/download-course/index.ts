@@ -80,18 +80,16 @@ Deno.serve(async (req) => {
     }
 
     // Replace this with your actual Google Docs link
-    // You can also redirect to a Google Drive download link if you have the file stored there
-    const googleDocsLink = 'https://docs.google.com/document/d/YOUR_GOOGLE_DOCS_ID/edit?usp=sharing';
+    // Replace FILE_ID with your actual Google Drive file ID
+    const googleDriveDownloadLink = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';
     
-    // For a direct download, you might want to use a Google Drive direct download link:
-    // const googleDriveDownloadLink = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';
 
-    // Redirect to the Google Docs link
+    // Redirect to the Google Drive download link
     return new Response(null, {
       status: 302,
       headers: {
         ...corsHeaders,
-        'Location': googleDocsLink,
+        'Location': googleDriveDownloadLink,
       },
     });
 
