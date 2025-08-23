@@ -1,10 +1,4 @@
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
 
 export const useStripe = () => {
   const [loading, setLoading] = useState(false);
@@ -15,16 +9,9 @@ export const useStripe = () => {
       setLoading(true);
       setError(null);
 
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        throw new Error('Morate biti ulogovani da biste kupili kurs');
-      }
-
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${session.access_token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
