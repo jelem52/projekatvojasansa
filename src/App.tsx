@@ -1,36 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { CheckoutForm } from './components/CheckoutForm';
-import { SuccessPage } from './components/SuccessPage';
 import { 
   Heart, 
   Users, 
   MessageCircle, 
   Target, 
   Star, 
+  CheckCircle, 
   Play,
   Instagram,
   ArrowRight,
   Zap,
+  Trophy,
+  BookOpen,
   Video,
-  X,
-  CheckCircle
+  Infinity,
+  X
 } from 'lucide-react';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'checkout' | 'success'>('home');
   const [showVideo, setShowVideo] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isDiscountActive, setIsDiscountActive] = useState(true);
 
-  // Check URL for success page
-  useEffect(() => {
-    if (window.location.pathname === '/success') {
-      setCurrentPage('success');
-    }
-  }, []);
-
-  // Countdown timer
   useEffect(() => {
     // Create a cycling countdown that resets every 4 days
     const cycleLength = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
@@ -54,14 +47,6 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  if (currentPage === 'checkout') {
-    return <CheckoutForm onBack={() => setCurrentPage('home')} />;
-  }
-
-  if (currentPage === 'success') {
-    return <SuccessPage />;
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
@@ -77,6 +62,14 @@ function App() {
               />
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Kupi sad
+            </a>
           </div>
         </div>
       </header>
@@ -106,8 +99,8 @@ function App() {
                     </div>
                     <div className="text-white text-sm">
                       {isDiscountActive 
-                        ? 'Cena kursa je snižena sa €15 na samo €11' 
-                        : 'Cena kursa je €11'
+                        ? 'Cena kursa je snižena sa $25 na samo $15' 
+                        : 'Cena kursa je $25'
                       }
                     </div>
                     {isDiscountActive && (
@@ -117,27 +110,24 @@ function App() {
                     )}
                   </div>
                   <div className="text-right">
-                    <div className="text-gray-400 text-lg line-through">€15</div>
+                    <div className="text-gray-400 text-lg line-through">$25</div>
                     <div className="text-3xl font-bold text-green-400">
-                      €{isDiscountActive ? '11' : '15'}
+                      ${isDiscountActive ? '15' : '25'}
                     </div>
                   </div>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setCurrentPage('checkout')}
-                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2 relative"
+                <a 
+                  href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
                 >
-                  <span>Kupi sad za €{isDiscountActive ? '11' : '15'}</span>
+                  <span>Nauči kako</span>
                   <ArrowRight className="w-5 h-5" />
-                  {isDiscountActive && (
-                    <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                      POPUST!
-                    </div>
-                  )}
-                </button>
+                </a>
                 <button className="border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10">
                   Saznaj više
                 </button>
@@ -269,20 +259,22 @@ function App() {
           </div>
 
           <div className="text-center mt-12">
-            <button
-              onClick={() => setCurrentPage('checkout')}
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
             >
               <span className="block text-center">Pristup celom kursu</span>
               <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
-                Kupi sad za €{isDiscountActive ? '11' : '15'}
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
               </span>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                   POPUST!
                 </div>
               )}
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -340,12 +332,14 @@ function App() {
           </p>
           
           <div className="space-y-4">
-            <button
-              onClick={() => setCurrentPage('checkout')}
+            <a 
+              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
             >
               <span className="block sm:inline">
-                Kupi sad za €{isDiscountActive ? '11' : '15'}
+                Kupi sad za ${isDiscountActive ? '15' : '25'}
               </span>
               <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
               {isDiscountActive && (
@@ -353,10 +347,10 @@ function App() {
                   POPUST!
                 </div>
               )}
-            </button>
+            </a>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
-              <CheckCircle className="w-4 h-4 text-pink-400" />
-              <span>Trenutni pristup kursu</span>
+              <Infinity className="w-4 h-4 text-pink-400" />
+              <span>Doživotni pristup kursu</span>
             </div>
           </div>
         </div>
