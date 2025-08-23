@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for Stripe buy button */
+.stripe-buy-button-wrapper {
+  /* Ensure the Stripe button integrates well with the design */
+}
+
+stripe-buy-button {
+  /* The Stripe button will inherit styles from Stripe's system */
+  /* You can add custom CSS here if needed to match your design */
+}
