@@ -62,14 +62,13 @@ function App() {
               />
               <h1 className="text-2xl font-bold text-white">Tvoja šansa</h1>
             </div>
-            <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Kupi sad
-            </a>
+            <div className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <stripe-buy-button
+                buy-button-id="buy_btn_1RzJxlQpqU47mltbJ3pwlstG"
+                publishable-key="pk_live_51Rz3QDQpqU47mltb9DcbgCnCU9lGV6yhtzhJXfvfjgOIHR6ocsqMU6LTCiUoIdS1IrlwuZJYGaWZdNk6XVTlerUh00ALU3SINT"
+              >
+              </stripe-buy-button>
+            </div>
           </div>
         </div>
       </header>
@@ -119,15 +118,13 @@ function App() {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2"
-                >
-                  <span>Nauči kako</span>
-                  <ArrowRight className="w-5 h-5" />
-                </a>
+                <div className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center justify-center space-x-2">
+                  <stripe-buy-button
+                    buy-button-id="buy_btn_1RzJxlQpqU47mltbJ3pwlstG"
+                    publishable-key="pk_live_51Rz3QDQpqU47mltb9DcbgCnCU9lGV6yhtzhJXfvfjgOIHR6ocsqMU6LTCiUoIdS1IrlwuZJYGaWZdNk6XVTlerUh00ALU3SINT"
+                  >
+                  </stripe-buy-button>
+                </div>
                 <button className="border-2 border-white/30 hover:border-white/50 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/10">
                   Saznaj više
                 </button>
@@ -259,22 +256,18 @@ function App() {
           </div>
 
           <div className="text-center mt-12">
-            <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative"
-            >
-              <span className="block text-center">Pristup celom kursu</span>
-              <span className="block text-center text-xs sm:text-base mt-1 sm:mt-0 sm:inline sm:ml-2">
-                Kupi sad za ${isDiscountActive ? '15' : '25'}
-              </span>
+            <div className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-4 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-xl leading-tight max-w-xs sm:max-w-none mx-auto block relative">
+              <stripe-buy-button
+                buy-button-id="buy_btn_1RzJxlQpqU47mltbJ3pwlstG"
+                publishable-key="pk_live_51Rz3QDQpqU47mltb9DcbgCnCU9lGV6yhtzhJXfvfjgOIHR6ocsqMU6LTCiUoIdS1IrlwuZJYGaWZdNk6XVTlerUh00ALU3SINT"
+              >
+              </stripe-buy-button>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                   POPUST!
                 </div>
               )}
-            </a>
+            </div>
           </div>
         </div>
       </section>
@@ -332,22 +325,18 @@ function App() {
           </p>
           
           <div className="space-y-4">
-            <a 
-              href="https://tvojaasansa.gumroad.com/l/eexxce?_gl=1*6dq7se*_ga*MTM0ODYxMzk2Mi4xNzUyNzg4MzY0*_ga_6LJN6D94N6*czE3NTI3OTE2MjIkbzIkZzEkdDE3NTI3OTE2MjUkajU3JGwwJGgw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative"
-            >
-              <span className="block sm:inline">
-                Kupi sad za ${isDiscountActive ? '15' : '25'}
-              </span>
-              <span className="block sm:inline sm:ml-2">Počni transformaciju</span>
+            <div className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-6 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-lg sm:text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl inline-block leading-tight relative">
+              <stripe-buy-button
+                buy-button-id="buy_btn_1RzJxlQpqU47mltbJ3pwlstG"
+                publishable-key="pk_live_51Rz3QDQpqU47mltb9DcbgCnCU9lGV6yhtzhJXfvfjgOIHR6ocsqMU6LTCiUoIdS1IrlwuZJYGaWZdNk6XVTlerUh00ALU3SINT"
+              >
+              </stripe-buy-button>
               {isDiscountActive && (
                 <div className="absolute -top-3 -right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                   POPUST!
                 </div>
               )}
-            </a>
+            </div>
             <div className="flex items-center justify-center space-x-2 text-gray-400 text-sm">
               <Infinity className="w-4 h-4 text-pink-400" />
               <span>Doživotni pristup kursu</span>
