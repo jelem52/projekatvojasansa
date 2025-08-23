@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { CheckoutForm } from './components/CheckoutForm';
 import { SuccessPage } from './components/SuccessPage';
-import { DownloadPage } from './components/DownloadPage';
 import { 
   Heart, 
   Users, 
@@ -19,23 +18,15 @@ import {
 } from 'lucide-react';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'checkout' | 'success' | 'download'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'checkout' | 'success'>('home');
   const [showVideo, setShowVideo] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isDiscountActive, setIsDiscountActive] = useState(true);
-  const [downloadToken, setDownloadToken] = useState<string | null>(null);
 
   // Check URL for success page
   useEffect(() => {
     if (window.location.pathname === '/success') {
       setCurrentPage('success');
-    } else if (window.location.pathname.startsWith('/download')) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get('token');
-      if (token) {
-        setDownloadToken(token);
-        setCurrentPage('download');
-      }
     }
   }, []);
 
@@ -69,10 +60,6 @@ function App() {
 
   if (currentPage === 'success') {
     return <SuccessPage />;
-  }
-
-  if (currentPage === 'download' && downloadToken) {
-    return <DownloadPage token={downloadToken} />;
   }
 
   return (
