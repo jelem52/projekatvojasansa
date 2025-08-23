@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
             <div style="text-align: center; margin: 40px 0;">
               <a href="${downloadUrl}" 
                  style="display: inline-block; background: linear-gradient(135deg, #ec4899 0%, #ef4444 100%); color: white; text-decoration: none; padding: 16px 32px; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); transition: all 0.3s ease;">
-                🚀 Preuzmite kurs sada
+                🚀 Pristupite kursu sada
               </a>
             </div>
             
@@ -92,7 +92,7 @@ Deno.serve(async (req) => {
             <div style="background-color: #f1f5f9; border-radius: 12px; padding: 24px; margin: 30px 0;">
               <h3 style="color: #1f2937; font-size: 18px; font-weight: bold; margin: 0 0 16px 0;">Šta vas čeka u kursu:</h3>
               <ul style="color: #4b5563; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Detaljne video lekcije o komunikaciji sa devojkama</li>
+                <li style="margin-bottom: 8px;">Kompletne lekcije o komunikaciji sa devojkama</li>
                 <li style="margin-bottom: 8px;">Tehnike za izgradnju samopouzdanja</li>
                 <li style="margin-bottom: 8px;">Psihologija privlačnosti i ženskog uma</li>
                 <li style="margin-bottom: 8px;">Praktični saveti za realne situacije</li>

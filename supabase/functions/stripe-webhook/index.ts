@@ -92,7 +92,7 @@ async function handleEvent(event: Stripe.Event) {
         const customerEmail = 'email' in customer ? customer.email : null;
 
         if (customerEmail) {
-          // Send course access email
+          // Send course access email to customer
           const emailResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-course-email`, {
             method: 'POST',
             headers: {
@@ -109,6 +109,27 @@ async function handleEvent(event: Stripe.Event) {
             console.error('Failed to send course email');
           } else {
             console.log('Course email sent successfully to:', customerEmail);
+          }
+
+          // Send admin notification email
+          const adminNotificationResponse = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-admin-notification`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              customerEmail: customerEmail,
+              customerName: 'name' in customer ? customer.name : null,
+              amount: session.amount_total,
+              currency: session.currency,
+            }),
+          });
+
+          if (!adminNotificationResponse.ok) {
+            console.error('Failed to send admin notification');
+          } else {
+            console.log('Admin notification sent successfully');
           }
         }
 
